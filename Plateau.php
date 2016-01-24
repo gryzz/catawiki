@@ -86,7 +86,7 @@ class Plateau {
      * @param int $yCoordinate
      * @param string $orientation
      * @return bool
-     * @throws Exception
+     * @throws CoordinatesOutOfGridException
      */
     public function isMovePossible($xCoordinate, $yCoordinate, $orientation) {
         list($newXCoordinate, $newYCoordinate) = $this->_alterCoordinates($xCoordinate, $yCoordinate, $orientation);
@@ -106,7 +106,7 @@ class Plateau {
      * @param int $yCoordinate
      * @param string $orientation
      * @return array
-     * @throws Exception
+     * @throws CoordinatesOutOfGridException
      */
     public function move($xCoordinate, $yCoordinate, $orientation) {
         return $this->_alterCoordinates($xCoordinate, $yCoordinate, $orientation);
@@ -119,7 +119,7 @@ class Plateau {
      * @param $yCoordinate
      * @param $orientation
      * @return array
-     * @throws Exception
+     * @throws CoordinatesOutOfGridException
      */
     private function _alterCoordinates($xCoordinate, $yCoordinate, $orientation) {
         if ($xCoordinate > $this->sizeX || $xCoordinate < 0 || $yCoordinate > $this->sizeY || $yCoordinate < 0) {

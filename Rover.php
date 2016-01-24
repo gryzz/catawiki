@@ -60,7 +60,8 @@ class Rover {
     /**
      * Executes instructions.
      *
-     * @throws Exception
+     * @throws ImpossibleMoveException
+     * @throws UnknownInstructionException
      */
     public function executeInstructions() {
         foreach ($this->instructions as $instruction) {
