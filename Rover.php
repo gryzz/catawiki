@@ -26,7 +26,9 @@ class Rover {
     }
 
     public function executeInstructions() {
-
+        $this->xPosition = 1;
+        $this->yPosition = 3;
+        $this->orientation = 'N';
     }
 
     public function getInfo() {
