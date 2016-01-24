@@ -12,6 +12,7 @@ class Plateau {
     const COORDINATE_X = 'x';
     const RIGHT = 'R';
     const LEFT = 'L';
+    const MOVE = 'M';
 
     /**
      * @var int
