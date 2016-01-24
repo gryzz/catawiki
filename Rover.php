@@ -15,7 +15,7 @@ class Rover {
 
     private $orientation;
 
-    private $instructions;
+    private $instructions = [];
 
     public function __construct(Plateau $plateau, $xPosition, $yPosition, $orientation, $instructions) {
         $this->plateau = $plateau;
