@@ -19,4 +19,18 @@ class Plateau {
         $this->sizeY = $y;
     }
 
+    /**
+     * Checks if move to direction is possible from defined coordinates;
+     *
+     * @param int $x
+     * @param int $y
+     * @param string $orientation
+     * @return bool
+     */
+    public function isMovePossible($xCoordinate, $yCoordinate, $orientation) {
+        return true;
+    }
+
+
+
 }
