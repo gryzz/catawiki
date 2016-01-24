@@ -69,6 +69,10 @@ class Plateau {
         ]
     ];
 
+    /**
+     * @param int $x
+     * @param int $y
+     */
     public function __construct($x, $y) {
         $this->sizeX = $x;
         $this->sizeY = $y;

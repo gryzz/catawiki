@@ -9,18 +9,45 @@ class Rover {
      */
     private $plateau;
 
+    /**
+     * @var int
+     */
     private $xPosition;
 
+    /**
+     * @var int
+     */
     private $yPosition;
 
+    /**
+     * @var string
+     */
     private $orientation;
 
+    /**
+     * Array of instructions.
+     *
+     * @var array
+     */
     private $instructions = [];
 
+    /**
+     * @var array
+     */
     private $allowedActions = [Plateau::MOVE];
 
+    /**
+     * @var array
+     */
     private $allowedTurnDirections = [Plateau::LEFT, Plateau::RIGHT];
 
+    /**
+     * @param Plateau $plateau
+     * @param int $xPosition
+     * @param int $yPosition
+     * @param int $orientation
+     * @param [] $instructions
+     */
     public function __construct(Plateau $plateau, $xPosition, $yPosition, $orientation, $instructions) {
         $this->plateau = $plateau;
         $this->xPosition = $xPosition;
@@ -29,6 +56,11 @@ class Rover {
         $this->instructions = $instructions;
     }
 
+    /**
+     * Executes instructions.
+     *
+     * @throws Exception
+     */
     public function executeInstructions() {
         foreach ($this->instructions as $instruction) {
             if (in_array($instruction, $this->allowedActions)) {
@@ -54,6 +86,11 @@ class Rover {
         }
     }
 
+    /**
+     * Composing rover info from its data.
+     *
+     * @return string
+     */
     public function getInfo() {
         return sprintf("%d %d %s", $this->xPosition, $this->yPosition, $this->orientation);
     }
