@@ -30,7 +30,7 @@ class Rover {
     }
 
     public function getInfo() {
-        return sprintf("%d %d %s", 1, 3, 'N');
+        return sprintf("%d %d %s", $this->xPosition, $this->yPosition, $this->orientation);
     }
 
 

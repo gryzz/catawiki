@@ -8,8 +8,11 @@ class RoverTest extends PHPUnit_Framework_TestCase {
         $plateau = $this->getMock(
             'Plateau', [], [], '', false
         );
-        $rover = new Rover($plateau, 1, 3, 'N', 'LMLM');
-        $this->assertEquals('1 3 N', $rover->getInfo());
+        $rover1 = new Rover($plateau, 1, 3, 'N', 'LMLM');
+        $this->assertEquals('1 3 N', $rover1->getInfo());
+
+        $rover1 = new Rover($plateau, 2, 3, 'N', 'LMLM');
+        $this->assertEquals('2 3 N', $rover1->getInfo());
 
     }
 }
