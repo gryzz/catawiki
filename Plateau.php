@@ -10,6 +10,8 @@ class Plateau {
     const EAST = 'E';
     const COORDINATE_Y = 'y';
     const COORDINATE_X = 'x';
+    const RIGHT = 'R';
+    const LEFT = 'L';
 
     /**
      * @var int
@@ -21,6 +23,11 @@ class Plateau {
      */
     private $sizeY;
 
+    /**
+     * Defines moving rules on plateau grid;
+     *
+     * @var array
+     */
     private $movingMap = [
         self::NORTH => [
             'coordinate' => self::COORDINATE_Y,
@@ -41,6 +48,26 @@ class Plateau {
 
     ];
 
+    /**
+     * Defines orientation change rules.
+     *
+     * @var array
+     */
+    private $turningMap = [
+        self::LEFT => [
+            self::NORTH => self::WEST,
+            self::WEST => self::SOUTH,
+            self::SOUTH => self::EAST,
+            self::EAST => self::NORTH
+        ],
+        self::RIGHT => [
+            self::NORTH => self::EAST,
+            self::EAST => self::SOUTH,
+            self::SOUTH => self::WEST,
+            self::WEST => self::NORTH
+        ]
+    ];
+
     public function __construct($x, $y) {
         $this->sizeX = $x;
         $this->sizeY = $y;
@@ -49,11 +76,11 @@ class Plateau {
     /**
      * Checks if move to direction is possible from defined coordinates;
      *
-     * @throws Exception
      * @param int $xCoordinate
      * @param int $yCoordinate
      * @param string $orientation
      * @return bool
+     * @throws Exception
      */
     public function isMovePossible($xCoordinate, $yCoordinate, $orientation) {
         list($newXCoordinate, $newYCoordinate) = $this->_alterCoordinates($xCoordinate, $yCoordinate, $orientation);
@@ -69,16 +96,25 @@ class Plateau {
     /**
      * Execute move on the plateau grid.
      *
-     * @throws Exception
      * @param int $xCoordinate
      * @param int $yCoordinate
      * @param string $orientation
      * @return array
+     * @throws Exception
      */
     public function move($xCoordinate, $yCoordinate, $orientation) {
         return $this->_alterCoordinates($xCoordinate, $yCoordinate, $orientation);
     }
 
+    /**
+     * Alters coordinates.
+     *
+     * @param $xCoordinate
+     * @param $yCoordinate
+     * @param $orientation
+     * @return array
+     * @throws Exception
+     */
     private function _alterCoordinates($xCoordinate, $yCoordinate, $orientation) {
         if ($xCoordinate > $this->sizeX || $xCoordinate < 0 || $yCoordinate > $this->sizeY || $yCoordinate < 0) {
             throw new Exception('Coordinates are out of range.');
@@ -91,6 +127,17 @@ class Plateau {
         }
 
         return [$xCoordinate, $yCoordinate];
+    }
+
+    /**
+     * Changes orientation.
+     *
+     * @param string $orientation
+     * @param sting $direction
+     * @return string
+     */
+    public function turn($orientation, $direction) {
+        return $this->turningMap[$direction][$orientation];
     }
 
 
