@@ -1,6 +1,7 @@
 <?php
 
 include_once "Plateau.php";
+include_once "Exceptions.php";
 
 class Rover {
 
@@ -69,7 +70,7 @@ class Rover {
                     $this->yPosition,
                     $this->orientation
                 )) {
-                    throw new Exception('Move is not possible - new position is out of the grid.');
+                    throw new ImpossibleMoveException('Move is not possible - new position is out of the grid.');
                 }
                 list($newXCoordinate, $newYCoordinate) = $this->plateau->move(
                     $this->xPosition,
@@ -81,7 +82,7 @@ class Rover {
             } elseif (in_array($instruction, $this->allowedTurnDirections)) {
                 $this->orientation = $this->plateau->turn($this->orientation, $instruction);
             } else {
-                throw new Exception('Unknown instruction.');
+                throw new UnknownInstructionException('Unknown instruction.');
             }
         }
     }

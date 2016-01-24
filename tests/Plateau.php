@@ -31,7 +31,7 @@ class PlateauTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @expectedException Exception
+     * @expectedException CoordinatesOutOfGridException
      */
     public function testMoveException () {
         $plateau = new Plateau(5, 5);

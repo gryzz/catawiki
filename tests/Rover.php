@@ -38,11 +38,20 @@ class RoverTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @expectedException Exception
+     * @expectedException ImpossibleMoveException
      */
     public function testExecuteInstructionException () {
         $plateau = new Plateau(5,5);
         $rover = new Rover($plateau, 5, 5, Plateau::SOUTH, ['M', 'M', 'M', 'M', 'M', 'L', 'M', 'M', 'M', 'M', 'M']);
+        $rover->executeInstructions();
+    }
+
+    /**
+     * @expectedException UnknownInstructionException
+     */
+    public function testUnknownInstructionException() {
+        $plateau = new Plateau(5,5);
+        $rover = new Rover($plateau, 5, 5, Plateau::SOUTH, ['42']);
         $rover->executeInstructions();
     }
 }

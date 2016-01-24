@@ -1,6 +1,7 @@
 <?php
 
 include_once "Rover.php";
+include_once "Exceptions.php";
 
 class Plateau {
 
@@ -122,7 +123,7 @@ class Plateau {
      */
     private function _alterCoordinates($xCoordinate, $yCoordinate, $orientation) {
         if ($xCoordinate > $this->sizeX || $xCoordinate < 0 || $yCoordinate > $this->sizeY || $yCoordinate < 0) {
-            throw new Exception('Coordinates are out of range.');
+            throw new CoordinatesOutOfGridException('Coordinates are out of range.');
         }
         $alteration = $this->movingMap[$orientation];
         if ($alteration['coordinate'] == self::COORDINATE_X) {
