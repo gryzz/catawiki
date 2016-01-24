@@ -56,26 +56,42 @@ class Plateau {
      * @return bool
      */
     public function isMovePossible($xCoordinate, $yCoordinate, $orientation) {
-
-        if ($xCoordinate > $this->sizeX || $xCoordinate < 0 || $yCoordinate > $this->sizeY || $yCoordinate < 0) {
-            throw new Exception('Coordinates are out of range.');
+        list($newXCoordinate, $newYCoordinate) = $this->_alterCoordinates($xCoordinate, $yCoordinate, $orientation);
+        if ($newXCoordinate > $this->sizeX || $newXCoordinate < 0) {
+            return false;
         }
-        $alteration = $this->movingMap[$orientation];
-
-        if ($alteration['coordinate'] == self::COORDINATE_X) {
-            $newXCoordinate = $xCoordinate + $alteration['alteration'];
-            if ($newXCoordinate > $this->sizeX || $newXCoordinate < 0) {
-                return false;
-            }
-        } else {
-            $newYCoordinate = $yCoordinate + $alteration['alteration'];
-            if ($newYCoordinate > $this->sizeY || $newYCoordinate < 0) {
-                return false;
-            }
+        if ($newYCoordinate > $this->sizeY || $newYCoordinate < 0) {
+            return false;
         }
         return true;
     }
 
+    /**
+     * Execute move on the plateau grid.
+     *
+     * @throws Exception
+     * @param int $xCoordinate
+     * @param int $yCoordinate
+     * @param string $orientation
+     * @return array
+     */
+    public function move($xCoordinate, $yCoordinate, $orientation) {
+        return $this->_alterCoordinates($xCoordinate, $yCoordinate, $orientation);
+    }
+
+    private function _alterCoordinates($xCoordinate, $yCoordinate, $orientation) {
+        if ($xCoordinate > $this->sizeX || $xCoordinate < 0 || $yCoordinate > $this->sizeY || $yCoordinate < 0) {
+            throw new Exception('Coordinates are out of range.');
+        }
+        $alteration = $this->movingMap[$orientation];
+        if ($alteration['coordinate'] == self::COORDINATE_X) {
+            $xCoordinate = $xCoordinate + $alteration['alteration'];
+        } else {
+            $yCoordinate = $yCoordinate + $alteration['alteration'];
+        }
+
+        return [$xCoordinate, $yCoordinate];
+    }
 
 
 }
