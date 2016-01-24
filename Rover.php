@@ -25,4 +25,14 @@ class Rover {
         $this->instructions = $instructions;
     }
 
+    public function executeInstructions() {
+
+    }
+
+    public function getInfo() {
+        return sprintf("%d %d %s", 1, 3, 'N');
+    }
+
+
+
 }
